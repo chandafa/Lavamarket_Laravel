@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    protected $redirectTo = '/user/dashboard'; // Default redirect
+    protected $redirectTo = '/home'; // Default redirect
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ class LoginController extends Controller
             if (Auth::user()->role === 'admin') {
                 return redirect()->intended('/admin/dashboard');
             } elseif (Auth::user()->role === 'user') {
-                return redirect()->intended('/user/dashboard');
+                return redirect()->intended('/home');
             }
         }
 
@@ -50,6 +50,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/home');
     }
 }

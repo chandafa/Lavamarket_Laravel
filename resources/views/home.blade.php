@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>HOME | IndoMarket</title>
+    <title>HOME | LavaMarket</title>
 
     <!-- Fonts -->
     <link
@@ -42,10 +42,20 @@
                     </div>
                     <div class="col-6 text-right">
                         <ul class="top-links account-links">
-                            <li><i class="fa fa-user-circle-o"></i> <a href="#">My Account</a></li>
-                            <li><i class="fa fa-power-off"></i> <a href="/login">Login</a></li>
+                            @if (Auth::check())
+                                <!-- Jika pengguna sudah login -->
+                                <li><i class="fa fa-user-circle-o"></i>
+                                    <a href="{{ url('/user/dashboard') }}">My Account</a>
+                                </li>
+                            @else
+                                <!-- Jika pengguna belum login -->
+                                <li><i class="fa fa-user-circle-o"></i>
+                                    <a href="{{ url('/login') }}">Login</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -53,8 +63,8 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-12 col-sm-6">
-                        <a class="navbar-brand mr-lg-5" href="./index.html">
-                            <i class="fa fa-shopping-bag fa-3x"></i> <span class="logo">IndoMarket</span>
+                        <a class="navbar-brand mr-lg-5" href="{{ url('/home') }}">
+                            <i class="fa fa-shopping-bag fa-3x"></i> <span class="logo">LavaMarket</span>
                         </a>
                     </div>
                     <div class="col-lg-7 col-12 col-sm-6">
@@ -316,7 +326,7 @@
                         <!-- Single Widget -->
                         <div class="single-footer about">
                             <div class="logo-footer">
-                                <i class="fa fa-shopping-bag fa-3x"></i> <span class="logo">IndoMarket</span>
+                                <i class="fa fa-shopping-bag fa-3x"></i> <span class="logo">LavaMarket</span>
                             </div>
                             <p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,
                                 magna
@@ -364,7 +374,7 @@
                                 <ul>
                                     <li>NO. 342 - London Oxford Street.</li>
                                     <li>012 United Kingdom.</li>
-                                    <li>info@indomarket.com</li>
+                                    <li>info@LavaMarket.com</li>
                                     <li>+032 3456 7890</li>
                                 </ul>
                             </div>
@@ -387,7 +397,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="left">
-                                <p>Copyright © 2021 <a href="http://indokoding.net" target="_blank">IndoKoding.net</a>
+                                <p>Copyright © 2024 <a href="http://indokoding.net" target="_blank">IndoKoding.net</a>
                                     -
                                     All Rights Reserved.</p>
                             </div>

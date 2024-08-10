@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     // Redirect users after registration
-    protected $redirectTo = '/home'; // Atur sesuai kebutuhan
+    protected $redirectTo = '/login'; // Atur sesuai kebutuhan
 
     public function __construct()
     {
