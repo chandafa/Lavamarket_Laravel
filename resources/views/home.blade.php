@@ -43,7 +43,7 @@
                     <div class="col-6 text-right">
                         <ul class="top-links account-links">
                             <li><i class="fa fa-user-circle-o"></i> <a href="#">My Account</a></li>
-                            <li><i class="fa fa-power-off"></i> <a href="/admin">Login</a></li>
+                            <li><i class="fa fa-power-off"></i> <a href="/login">Login</a></li>
                         </ul>
                     </div>
                 </div>
