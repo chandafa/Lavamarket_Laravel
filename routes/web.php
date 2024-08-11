@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\HomeController;
+
 
 
 
@@ -20,12 +22,17 @@ use App\Http\Controllers\User\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/home', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+// Route::get('/home', function () {
+//     return view('home');
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
+
+
 
 // Menampilkan formulir login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -48,3 +55,5 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard');
 });
+
+// Route::get('/', [HomeController::class, 'index'])->name('home');

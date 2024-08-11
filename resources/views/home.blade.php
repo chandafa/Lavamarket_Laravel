@@ -27,19 +27,43 @@
 
     <!-- Optional Plugins-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    {{-- <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script> --}}
+
+    <style>
+        #skeleton .single-product {
+            height: 452px;
+            /* Sesuaikan dengan tinggi card asli */
+        }
+
+        #skeleton .product-img {
+            height: 356px;
+            /* Sesuaikan dengan tinggi gambar card asli */
+        }
+    </style>
 </head>
 
 <body>
+    {{-- Header --}}
     <header class="header clearfix">
         <div class="top-bar d-none d-sm-block">
             <div class="container">
                 <div class="row">
                     <div class="col-6 text-left">
-                        <ul class="top-links contact-info">
+                        <!-- Tampilkan hanya pada ukuran layar desktop -->
+                        <ul class="top-links contact-info d-none d-lg-block">
                             <li><i class="fa fa-envelope-o"></i> <a href="#">contact@example.com</a></li>
                             <li><i class="fa fa-whatsapp"></i> +1 5589 55488 55</li>
                         </ul>
+
+                        <!-- Tampilkan hanya pada ukuran layar tablet -->
+                        <ul class="top-links contact-info d-block d-lg-none">
+                            <li><i class="fa fa-envelope-o"></i> <a href="#">contact@example.com</a></li>
+                        </ul>
                     </div>
+
                     <div class="col-6 text-right">
                         <ul class="top-links account-links">
                             @if (Auth::check())
@@ -125,14 +149,12 @@
             </div> <!-- container .// -->
         </nav>
     </header>
-    <!------------------------------------------
-    SLIDER
-    ------------------------------------------->
+    {{-- SLIDER --}}
     <section class="slider-section pt-4 pb-4">
         <div class="container">
             <div class="slider-inner">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 ">
                         <nav class="nav-category">
                             <h2>Categories</h2>
                             <ul class="menu-category">
@@ -146,7 +168,7 @@
                         </nav>
                     </div>
                     <div class="col-md-9">
-                        <div id="carouselExampleIndicators" class="carousel slide carousel-fade"
+                        <div id="carouselExampleIndicators" class="carousel slide carousel-fade "
                             data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -183,12 +205,11 @@
             </div>
         </div>
     </section>
-
-    <!-- Services -->
+    {{-- Services --}}
     <section class="pt-5 pb-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 ">
                     <div class="media">
                         <div class="iconbox iconmedium rounded-circle text-info mr-4">
                             <i class="fa fa-truck"></i>
@@ -230,7 +251,7 @@
             </div>
         </div>
     </section>
-    <!-- End Services -->
+    {{-- Produk --}}
     <section class="products-grids trending pb-4">
         <div class="container">
             <div class="row">
@@ -240,70 +261,48 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <a href="product-detail.html">
-                                <img src="{{ asset('img/products/p1.jpg') }}" class="img-fluid" />
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="product-detail.html">Cool &amp; Awesome Item</a></h3>
-                            <div class="product-price">
-                                <span>$57.00</span>
+
+            <!-- Skeleton Loader -->
+            <div id="skeleton" class="row mt-4">
+                @for ($i = 0; $i < 4; $i++)
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                        <div class="single-product">
+                            <div class="product-img bg-secondary rounded"></div>
+                            <div class="product-content mt-4">
+                                <h3 class="bg-secondary rounded" style="height: 20px;"></h3>
+                                <div class="product-price bg-secondary rounded mt-2"
+                                    style="height: 15px; width: 50%;"></div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <a href="product-detail.html">
-                                <img src="{{ asset('img/products/p2.jpg') }}" class="img-fluid" />
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="product-detail.html">Cool &amp; Awesome Item</a></h3>
-                            <div class="product-price">
-                                <span>$57.00</span>
+                @endfor
+            </div>
+
+            <!-- Product List (Initially Hidden) -->
+            <div id="product-list" class="row mt-4 d-none">
+                @foreach ($products as $product)
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <a href="product-detail.html">
+                                    <img src="{{ asset('storage/' . $product->gambarProduk) }}" class="img-fluid" />
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3><a class="title-produk" href="product-detail.html">{{ $product->namaProduk }}</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span>{{ $product->hargaProduk }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <a href="product-detail.html">
-                                <img src="{{ asset('img/products/p3.jpg') }}" class="img-fluid" />
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="product-detail.html">Cool &amp; Awesome Item</a></h3>
-                            <div class="product-price">
-                                <span>$57.00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <a href="product-detail.html">
-                                <img src="{{ asset('img/products/p4.jpg') }}" class="img-fluid" />
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="product-detail.html">Cool &amp; Awesome Item</a></h3>
-                            <div class="product-price">
-                                <span>$57.00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+
+    {{-- Mobile Apps --}}
     <section class="mobile-apps pt-5 pb-3 border-top">
         <div class="container">
             <div class="row">
@@ -318,6 +317,7 @@
             </div> <!-- row.// -->
         </div><!-- container // -->
     </section>
+    {{-- Footer --}}
     <footer class="footer bg-primary">
         <div class="footer-top">
             <div class="container">
@@ -418,6 +418,18 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Waktu delay untuk skeleton loading, misal 2 detik
+            setTimeout(function() {
+                // Sembunyikan skeleton dan tampilkan produk
+                document.getElementById("skeleton").classList.add("d-none");
+                document.getElementById("product-list").classList.remove("d-none");
+            }, 2000); // 2000ms = 2 detik
+        });
+    </script>
+
     <!-- Core -->
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
     <script src="{{ asset('js/core/popper.min.js') }}"></script>
@@ -432,6 +444,9 @@
 
     <!-- Main JS-->
     <script src="{{ asset('js/main.js') }}"></script>
+
+
+
 </body>
 
 </html>
